@@ -17,23 +17,23 @@
 
 CREATE TABLE atomic.com_mailchimp_email_address_change_1 (
     -- Schema of this type
-    schema_vendor           varchar(128)   encode runlength not null,
-    schema_name             varchar(128)   encode runlength not null,
-    schema_format           varchar(128)   encode runlength not null,
-    schema_version          varchar(128)   encode runlength not null,
+    schema_vendor    VARCHAR(128)  ENCODE ZSTD NOT NULL,
+    schema_name      VARCHAR(128)  ENCODE ZSTD NOT NULL,
+    schema_format    VARCHAR(128)  ENCODE ZSTD NOT NULL,
+    schema_version   VARCHAR(128)  ENCODE ZSTD NOT NULL,
     -- Parentage of this type
-    root_id                 char(36)       encode raw not null,
-    root_tstamp             timestamp      encode raw not null,
-    ref_root                varchar(255)   encode runlength not null,
-    ref_tree                varchar(1500)  encode runlength not null,
-    ref_parent              varchar(255)   encode runlength not null,
+    root_id          CHAR(36)      ENCODE RAW  NOT NULL,
+    root_tstamp      TIMESTAMP     ENCODE ZSTD NOT NULL,
+    ref_root         VARCHAR(255)  ENCODE ZSTD NOT NULL,
+    ref_tree         VARCHAR(1500) ENCODE ZSTD NOT NULL,
+    ref_parent       VARCHAR(255)  ENCODE ZSTD NOT NULL,
     -- Properties of this type
-    type                    varchar(255)   encode raw,
-    fired_at                timestamp      encode raw,
-    "data.list_id"          varchar(255)   encode raw,
-    "data.new_email"        varchar(255)   encode raw,
-    "data.new_id"           varchar(255)   encode raw,
-    "data.old_email"        varchar(255)   encode raw,
+    type             VARCHAR(255)  ENCODE ZSTD,
+    fired_at         TIMESTAMP     ENCODE ZSTD,
+    "data.list_id"   VARCHAR(255)  ENCODE ZSTD,
+    "data.new_email" VARCHAR(255)  ENCODE ZSTD,
+    "data.new_id"    VARCHAR(255)  ENCODE ZSTD,
+    "data.old_email" VARCHAR(255)  ENCODE ZSTD,
     FOREIGN KEY(root_id) REFERENCES atomic.events(event_id)
 )
 DISTSTYLE KEY
