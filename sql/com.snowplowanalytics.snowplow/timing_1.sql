@@ -17,21 +17,21 @@
 
 CREATE TABLE atomic.com_snowplowanalytics_snowplow_timing_1 (
 	-- Schema of this type
-	schema_vendor  varchar(128)  encode runlength not null,
-	schema_name    varchar(128)  encode runlength not null,
-	schema_format  varchar(128)  encode runlength not null,
-	schema_version varchar(128)  encode runlength not null,
+	schema_vendor  VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_name    VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_format  VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_version VARCHAR(128)  ENCODE ZSTD NOT NULL,
 	-- Parentage of this type
-	root_id        char(36)      encode raw not null,
-	root_tstamp    timestamp     encode raw not null,
-	ref_root       varchar(255)  encode runlength not null,
-	ref_tree       varchar(1500) encode runlength not null,
-	ref_parent     varchar(255)  encode runlength not null,
+	root_id        CHAR(36)      ENCODE RAW  NOT NULL,
+	root_tstamp    TIMESTAMP     ENCODE ZSTD NOT NULL,
+	ref_root       VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	ref_tree       VARCHAR(1500) ENCODE ZSTD NOT NULL,
+	ref_parent     VARCHAR(255)  ENCODE ZSTD NOT NULL,
 	-- Properties of this type
-	category       varchar(255)  encode text255 not null,
-	variable       varchar(255)  encode text32k not null,
-	timing         integer       encode raw not null,
-	label          varchar(255)  encode text32k,
+	category       VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	variable       VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	timing         INTEGER       ENCODE ZSTD NOT NULL,
+	label          VARCHAR(255)  ENCODE ZSTD,
 	FOREIGN KEY(root_id) REFERENCES atomic.events(event_id)
 )
 DISTSTYLE KEY

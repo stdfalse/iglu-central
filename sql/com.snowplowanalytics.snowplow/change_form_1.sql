@@ -18,23 +18,23 @@
 
 CREATE TABLE atomic.com_snowplowanalytics_snowplow_change_form_1 (
 	-- Schema of this type
-	schema_vendor   varchar(128)  encode runlength not null,
-	schema_name     varchar(128)  encode runlength not null,
-	schema_format   varchar(128)  encode runlength not null,
-	schema_version  varchar(128)  encode runlength not null,
+	schema_vendor   VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_name     VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_format   VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_version  VARCHAR(128)  ENCODE ZSTD NOT NULL,
 	-- Parentage of this type
-	root_id         char(36)      encode raw not null,
-	root_tstamp     timestamp     encode raw not null,
-	ref_root        varchar(255)  encode runlength not null,
-	ref_tree        varchar(1500) encode runlength not null,
-	ref_parent      varchar(255)  encode runlength not null,
+	root_id         CHAR(36)      ENCODE RAW  NOT NULL,
+	root_tstamp     TIMESTAMP     ENCODE ZSTD NOT NULL,
+	ref_root        VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	ref_tree        VARCHAR(1500) ENCODE ZSTD NOT NULL,
+	ref_parent      VARCHAR(255)  ENCODE ZSTD NOT NULL,
 	-- Properties of this type
-	form_id         varchar(255)  encode text32k not null,
-	element_id      varchar(255)  encode text32k not null,
-	node_name       varchar(8)    encode runlength not null,
-	type            varchar(15)   encode runlength,
-	element_classes varchar(2048) encode raw, -- Holds a JSON array. TODO: will replace with a ref_ following https://github.com/snowplow/snowplow/issues/647
-	value           varchar(2048) encode raw, -- Cannot enforce not null due to https://github.com/snowplow/snowplow/issues/1134
+	form_id         VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	element_id      VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	node_name       VARCHAR(8)    ENCODE ZSTD NOT NULL,
+	type            VARCHAR(15)   ENCODE ZSTD,
+	element_classes VARCHAR(2048) ENCODE ZSTD, -- holds a json array. todo: will replace with a ref_ following https://github.com/snowplow/snowplow/issues/647
+	value           VARCHAR(2048) ENCODE ZSTD, -- cannot enforce not null due to https://github.com/snowplow/snowplow/issues/1134
 	FOREIGN KEY(root_id) REFERENCES atomic.events(event_id)
 )
 DISTSTYLE KEY

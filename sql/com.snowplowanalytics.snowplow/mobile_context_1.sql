@@ -17,26 +17,26 @@
 
 CREATE TABLE atomic.com_snowplowanalytics_snowplow_mobile_context_1 (
 	-- Schema of this type
-	schema_vendor       varchar(128)  encode runlength not null,
-	schema_name         varchar(128)  encode runlength not null,
-	schema_format       varchar(128)  encode runlength not null,
-	schema_version      varchar(128)  encode runlength not null,
+	schema_vendor       VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_name         VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_format       VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_version      VARCHAR(128)  ENCODE ZSTD NOT NULL,
 	-- Parentage of this type
-	root_id             char(36)      encode raw not null,
-	root_tstamp         timestamp     encode raw not null,
-	ref_root            varchar(255)  encode runlength not null,
-	ref_tree            varchar(1500) encode runlength not null,
-	ref_parent          varchar(255)  encode runlength not null,
+	root_id             CHAR(36)      ENCODE RAW  NOT NULL,
+	root_tstamp         TIMESTAMP     ENCODE ZSTD NOT NULL,
+	ref_root            VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	ref_tree            VARCHAR(1500) ENCODE ZSTD NOT NULL,
+	ref_parent          VARCHAR(255)  ENCODE ZSTD NOT NULL,
 	-- Properties of this type
-	os_type             varchar(255)  encode text255 not null,
-	os_version          varchar(255)  encode text32k not null,
-	device_manufacturer varchar(255)  encode text255 not null,
-	device_model        varchar(255)  encode text32k not null,
-	carrier             varchar(255)  encode text32k,
-	open_idfa           varchar(128)  encode runlength,
-	apple_idfa          varchar(128)  encode runlength,
-	apple_idfv          varchar(128)  encode runlength,
-	android_idfa        varchar(128)  encode runlength,
+	os_type             VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	os_version          VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	device_manufacturer VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	device_model        VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	carrier             VARCHAR(255)  ENCODE ZSTD,
+	open_idfa           VARCHAR(128)  ENCODE ZSTD,
+	apple_idfa          VARCHAR(128)  ENCODE ZSTD,
+	apple_idfv          VARCHAR(128)  ENCODE ZSTD,
+	android_idfa        VARCHAR(128)  ENCODE ZSTD,
 	FOREIGN KEY(root_id) REFERENCES atomic.events(event_id)
 )
 DISTSTYLE KEY

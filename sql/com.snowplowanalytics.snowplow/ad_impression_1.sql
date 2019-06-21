@@ -17,25 +17,25 @@
 
 CREATE TABLE atomic.com_snowplowanalytics_snowplow_ad_impression_1 (
 	-- Schema of this type
-	schema_vendor  varchar(128)   encode runlength not null,
-	schema_name    varchar(128)   encode runlength not null,
-	schema_format  varchar(128)   encode runlength not null,
-	schema_version varchar(128)   encode runlength not null,
+	schema_vendor  VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_name    VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_format  VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_version VARCHAR(128)  ENCODE ZSTD NOT NULL,
 	-- Parentage of this type
-	root_id        char(36)       encode raw not null,
-	root_tstamp    timestamp      encode raw not null,
-	ref_root       varchar(255)   encode runlength not null,
-	ref_tree       varchar(1500)  encode runlength not null,
-	ref_parent     varchar(255)   encode runlength not null,
+	root_id        CHAR(36)      ENCODE RAW  NOT NULL,
+	root_tstamp    TIMESTAMP     ENCODE ZSTD NOT NULL,
+	ref_root       VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	ref_tree       VARCHAR(1500) ENCODE ZSTD NOT NULL,
+	ref_parent     VARCHAR(255)  ENCODE ZSTD NOT NULL,
 	-- Properties of this type
-	impression_id  varchar(255)   encode raw,
-	zone_id        varchar(255)   encode raw,
-	banner_id      varchar(255)   encode raw,
-	campaign_id    varchar(255)   encode runlength,
-	advertiser_id  varchar(255)   encode runlength,
-	target_url     varchar(4096)  encode runlength,
-	cost_model     char(3)        encode runlength,
-	cost           decimal(15,2) encode runlength,
+	impression_id  VARCHAR(255)  ENCODE ZSTD,
+	zone_id        VARCHAR(255)  ENCODE ZSTD,
+	banner_id      VARCHAR(255)  ENCODE ZSTD,
+	campaign_id    VARCHAR(255)  ENCODE ZSTD,
+	advertiser_id  VARCHAR(255)  ENCODE ZSTD,
+	target_url     VARCHAR(4096) ENCODE ZSTD,
+	cost_model     CHAR(3)       ENCODE ZSTD,
+	cost           DECIMAL(15,2) ENCODE ZSTD,
 	FOREIGN KEY(root_id) REFERENCES atomic.events(event_id)
 )
 DISTSTYLE KEY

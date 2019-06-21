@@ -17,21 +17,21 @@
 
 CREATE TABLE atomic.com_snowplowanalytics_snowplow_site_search_1 (
 	-- Schema of this type
-	schema_vendor   varchar(128)  encode runlength not null,
-	schema_name     varchar(128)  encode runlength not null,
-	schema_format   varchar(128)  encode runlength not null,
-	schema_version  varchar(128)  encode runlength not null,
+	schema_vendor  VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_name    VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_format  VARCHAR(128)  ENCODE ZSTD NOT NULL,
+	schema_version VARCHAR(128)  ENCODE ZSTD NOT NULL,
 	-- Parentage of this type
-	root_id         char(36)      encode raw not null,
-	root_tstamp     timestamp     encode raw not null,
-	ref_root        varchar(255)  encode runlength not null,
-	ref_tree        varchar(1500) encode runlength not null,
-	ref_parent      varchar(255)  encode runlength not null,
+	root_id        CHAR(36)      ENCODE RAW  NOT NULL,
+	root_tstamp    TIMESTAMP     ENCODE ZSTD NOT NULL,
+	ref_root       VARCHAR(255)  ENCODE ZSTD NOT NULL,
+	ref_tree       VARCHAR(1500) ENCODE ZSTD NOT NULL,
+	ref_parent     VARCHAR(255)  ENCODE ZSTD NOT NULL,
 	-- Properties of this type
-	terms           varchar(2048) encode raw not null, -- Holds a JSON array. TODO: will replace with a ref_ following https://github.com/snowplow/snowplow/issues/647
-	filters         varchar(2048) encode raw, -- Holds a JSON object. TODO: will replace with a ref_ following https://github.com/snowplow/snowplow/issues/647
-	total_results   int encode raw,
-	page_results    int encode runlength,
+	terms          VARCHAR(2048) ENCODE ZSTD NOT NULL, -- HOLDS A JSON ARRAY. TODO: WILL REPLACE WITH A REF_ FOLLOWING HTTPS://GITHUB.COM/SNOWPLOW/SNOWPLOW/ISSUES/647
+	filters        VARCHAR(2048) ENCODE ZSTD, -- holds a json object. todo: will replace with a ref_ following https://github.com/snowplow/snowplow/issues/647
+	total_results  INT           ENCODE ZSTD,
+	page_results   INT           ENCODE ZSTD,
 	FOREIGN KEY(root_id) REFERENCES atomic.events(event_id)
 )
 DISTSTYLE KEY

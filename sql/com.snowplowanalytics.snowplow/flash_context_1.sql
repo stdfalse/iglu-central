@@ -17,27 +17,27 @@
 
 CREATE TABLE atomic.com_snowplowanalytics_snowplow_flash_context_1 (
 	-- Schema of this type
-	schema_vendor        varchar(128)  encode runlength not null,
-	schema_name          varchar(128)  encode runlength not null,
-	schema_format        varchar(128)  encode runlength not null,
-	schema_version       varchar(128)  encode runlength not null,
+	schema_vendor        VARCHAR(128)  ENCODE ZSTD      NOT NULL,
+	schema_name          VARCHAR(128)  ENCODE ZSTD      NOT NULL,
+	schema_format        VARCHAR(128)  ENCODE ZSTD      NOT NULL,
+	schema_version       VARCHAR(128)  ENCODE ZSTD      NOT NULL,
 	-- Parentage of this type
-	root_id              char(36)      encode raw not null,
-	root_tstamp          timestamp     encode raw not null,
-	ref_root             varchar(255)  encode runlength not null,
-	ref_tree             varchar(1500) encode runlength not null,
-	ref_parent           varchar(255)  encode runlength not null,
+	root_id              CHAR(36)      ENCODE RAW       NOT NULL,
+	root_tstamp          TIMESTAMP     ENCODE ZSTD      NOT NULL,
+	ref_root             VARCHAR(255)  ENCODE ZSTD      NOT NULL,
+	ref_tree             VARCHAR(1500) ENCODE ZSTD      NOT NULL,
+	ref_parent           VARCHAR(255)  ENCODE ZSTD      NOT NULL,
 	-- Properties of this type
-	player_type          varchar(10)   encode bytedict not null,
-	version              varchar(255)  encode text32k not null,
-	stage_size_width     integer       encode runlength,
-	stage_size_height    integer       encode runlength,
-	is_debugger          boolean       encode runlength not null,
-	has_local_storage    boolean       encode runlength not null,
-	has_script_access    boolean       encode runlength not null,
-	domain_session_index integer       encode runlength,
-	domain_user_id       varchar(36)   encode runlength,
-	user_fingerprint     varchar(50)   encode runlength,
+	player_type          VARCHAR(10)   ENCODE ZSTD      NOT NULL,
+	version              VARCHAR(255)  ENCODE ZSTD      NOT NULL,
+	stage_size_width     INTEGER       ENCODE ZSTD,
+	stage_size_height    INTEGER       ENCODE ZSTD,
+	is_debugger          BOOLEAN       ENCODE RUNLENGTH NOT NULL,
+	has_local_storage    BOOLEAN       ENCODE RUNLENGTH NOT NULL,
+	has_script_access    BOOLEAN       ENCODE RUNLENGTH NOT NULL,
+	domain_session_index INTEGER       ENCODE ZSTD,
+	domain_user_id       VARCHAR(36)   ENCODE ZSTD,
+	user_fingerprint     VARCHAR(50)   ENCODE ZSTD,
 	FOREIGN KEY(root_id) REFERENCES atomic.events(event_id)
 )
 
